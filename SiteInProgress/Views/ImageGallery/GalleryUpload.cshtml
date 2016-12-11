@@ -1,0 +1,32 @@
+﻿
+@model SiteInProgress.ImageGallery
+@{
+    ViewBag.Title = "";
+}
+<h2>Upload</h2>
+@using (Html.BeginForm("GalleryUpload", "ImageGallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>Select File : </td>
+            <td>
+                @Html.TextBoxFor(Model => Model.File, new { type = "file" })
+                
+            </td>
+            <td>
+                @Html.TextBoxFor(Model => Model.Title, new { type = "text" })
+            </td>
+            <td>
+                @Html.ValidationMessage("CustomError")
+            </td>
+            <td>
+                <input type="submit" value="Upload" />
+            </td>
+        </tr>
+    </table>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
