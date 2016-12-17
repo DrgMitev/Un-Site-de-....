@@ -124,18 +124,5 @@ namespace Blog.Controllers.Admin
                 return RedirectToAction("Index");
             }
         }
-
-        [HttpPost]
-        [ActionName("Search")]
-        public ActionResult Search(string searchString)
-        {
-            var category = "";
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var database = new ApplicationDbContext();
-                category = database.Categories.FirstOrDefault(c => c.Name.Equals(searchString)).ToString();
-            }
-            return View(category.ToList());
-        }
     }
 }
