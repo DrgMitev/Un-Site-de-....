@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using SiteInProgress.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

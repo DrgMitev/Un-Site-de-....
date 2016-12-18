@@ -6,21 +6,25 @@
 <p>
     @Html.ActionLink("GalleryUpload", "Upload")
 </p>
-@* Here I will show Uploaded Images *@
+@* Upload Images *@
 <table>
     @{
         int j = 0;
-        for (int i = 0; i < Model.Count(); i += 4)
+        for (int i = Model.Count; i >= 0; i -= 5)
         {
             j = i;
             <tr>
-                @* I have done this for show 4 images in  a Row *@
-                @while (j < i + 4 && j < Model.Count())
+                @* show 5 images in  a Row *@
+                @while (j > i - 5 && j > 0)
                 {
+
                     <td>
-                        <img src="data:image/png;base64,@Convert.ToBase64String(Model[j].FileData,0,Model[j].FileData.Length)" width="100" />
+                        <form action="@Url.Action("GalleryEdit", "ImageGallery", new { id = Model[j-1].FileID })">
+                            <input type="image" src="data:image/png;base64,@Convert.ToBase64String(Model[j-1].FileData,0,Model[j-1].FileData.Length)" width="200" />
+                        </form>
+
                     </td>
-                    j++;
+                    j--;
                 }
             </tr>
         }

@@ -26,5 +26,9 @@ namespace SiteInProgress.Controllers
 
             return View();
         }
+        public ActionResult Authorize()
+        {
+            return View();
+        }
     }
 }

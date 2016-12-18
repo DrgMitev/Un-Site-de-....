@@ -6,15 +6,14 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
 
 namespace SiteInProgress
 {
-    
-    
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class ImageGallery
     {
         public int FileID { get; set; }
@@ -23,7 +22,11 @@ namespace SiteInProgress
         public byte[] FileData { get; set; }
         public string UserID { get; set; }
         public DateTime DateOfPosting { get; set; }
-        [Required(ErrorMessage = "Please select picture")]
+
+
+        [Display(Name = "Upload an Image")]
         public HttpPostedFileBase File { get; set; }
+
+        public string Title { get; set; }
     }
 }
