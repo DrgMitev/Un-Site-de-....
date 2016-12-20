@@ -1,5 +1,5 @@
 ﻿
-@model SiteInProgress.ImageGallery
+@model SiteInProgress.Models.GalleryUploadView
 @{
     ViewBag.Title = "";
 }
@@ -11,18 +11,26 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.File, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ImageGallery.File, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.File, new { @class = "form-control", type = "file" })
+            @Html.TextBoxFor(m => m.ImageGallery.File, new { @class = "form-control", type = "file" })
         </div>
     </div>
 
 
     <div class="form-group">
       
-        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.ImageGallery.Title, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Title, new {  @class = "textarea" })
+            @Html.TextBoxFor(m => m.ImageGallery.Title, new {  @class = "textarea" })
+        </div>
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.ImageGallery.CategoryId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.ImageGallery.CategoryId,
+           new SelectList(Model.Categories, "Id", "CategoryName"), new { @class = "textarea" })
         </div>
     </div>
 
@@ -33,9 +41,9 @@
     </div>
 }   
 
-@if(Model!=null)
+@if(Model.ImageGallery.File!=null)
 {
-    <img src="data:image/png;base64,@Convert.ToBase64String(Model.FileData,0,Model.FileData.Length)" box-shadow: 8px 8px 10px #aaa/>
+    <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageGallery.FileData,0,Model.ImageGallery.FileData.Length)" box-shadow: 8px 8px 10px #aaa/>
 }
 
 

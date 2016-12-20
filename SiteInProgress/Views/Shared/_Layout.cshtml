@@ -24,8 +24,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Share your thoughts ", "GalleryUpload", "ImageGallery")</li>
+                    @*<li>@Html.ActionLink("Share your thoughts ", "GalleryUpload", "ImageGallery")</li>*@
                     <li>@Html.ActionLink("See the world around you ", "GalleryList", "ImageGallery")</li>
+                    <li>@Html.ActionLink("Give us a subject ", "Index", "Category")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

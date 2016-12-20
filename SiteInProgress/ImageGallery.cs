@@ -16,17 +16,25 @@ namespace SiteInProgress
 
     public partial class ImageGallery
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ImageGallery()
+        {
+            this.AspNetUsers = new HashSet<AspNetUser>();
+        }
+    
         public int FileID { get; set; }
         public int FileSize { get; set; }
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public string UserID { get; set; }
-        public DateTime DateOfPosting { get; set; }
-
-
-        [Display(Name = "Upload an Image")]
-        public HttpPostedFileBase File { get; set; }
-
+        public System.DateTime DateOfPosting { get; set; }
         public string Title { get; set; }
+        [Display(Name="Subject Name")]
+        public int CategoryId { get; set; }
+        [Display(Name ="Please choose a picture")]
+        public HttpPostedFileBase File { get; set; }
+        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

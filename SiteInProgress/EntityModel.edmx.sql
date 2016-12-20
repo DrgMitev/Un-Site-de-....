@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/17/2016 20:20:11
+-- Date Created: 12/20/2016 23:47:57
 -- Generated from EDMX file: C:\Users\speed\Documents\Visual Studio 2015\Projects\SiteInProgress\SiteInProgress\EntityModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [aspnet-SiteInProgress-20161208112244];
+USE [C:\USERS\SPEED\DOCUMENTS\VISUAL STUDIO 2015\PROJECTS\SITEINPROGRESS\SITEINPROGRESS\APP_DATA\SERVERDATABASE.MDF];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -28,6 +28,9 @@ IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetRoles]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_AspNetUserRoles_AspNetUsers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_AspNetUserRoles_AspNetUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CategoryImageGallery]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ImageGalleries] DROP CONSTRAINT [FK_CategoryImageGallery];
 GO
 IF OBJECT_ID(N'[dbo].[FK_AspNetUserImageGallery]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ImageGalleries] DROP CONSTRAINT [FK_AspNetUserImageGallery];
@@ -51,6 +54,9 @@ IF OBJECT_ID(N'[dbo].[AspNetUsers]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[ImageGalleries]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ImageGalleries];
+GO
+IF OBJECT_ID(N'[dbo].[Categories]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categories];
 GO
 IF OBJECT_ID(N'[dbo].[AspNetUserRoles]', 'U') IS NOT NULL
     DROP TABLE [dbo].[AspNetUserRoles];
@@ -109,7 +115,15 @@ CREATE TABLE [dbo].[ImageGalleries] (
     [FileData] varbinary(max)  NOT NULL,
     [UserID] nvarchar(128)  NOT NULL,
     [DateOfPosting] datetime  NOT NULL,
-    [Title] nvarchar(max)  NOT NULL
+    [Title] nvarchar(max)  NULL,
+    [CategoryId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Categories'
+CREATE TABLE [dbo].[Categories] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CategoryName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -152,6 +166,12 @@ GO
 ALTER TABLE [dbo].[ImageGalleries]
 ADD CONSTRAINT [PK_ImageGalleries]
     PRIMARY KEY CLUSTERED ([FileID] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Categories'
+ALTER TABLE [dbo].[Categories]
+ADD CONSTRAINT [PK_Categories]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- Creating primary key on [AspNetRoles_Id], [AspNetUsers_Id] in table 'AspNetUserRoles'
@@ -216,6 +236,21 @@ GO
 CREATE INDEX [IX_FK_AspNetUserRoles_AspNetUsers]
 ON [dbo].[AspNetUserRoles]
     ([AspNetUsers_Id]);
+GO
+
+-- Creating foreign key on [CategoryId] in table 'ImageGalleries'
+ALTER TABLE [dbo].[ImageGalleries]
+ADD CONSTRAINT [FK_CategoryImageGallery]
+    FOREIGN KEY ([CategoryId])
+    REFERENCES [dbo].[Categories]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CategoryImageGallery'
+CREATE INDEX [IX_FK_CategoryImageGallery]
+ON [dbo].[ImageGalleries]
+    ([CategoryId]);
 GO
 
 -- Creating foreign key on [UserID] in table 'ImageGalleries'
