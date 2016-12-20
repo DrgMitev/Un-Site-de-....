@@ -1,4 +1,4 @@
-namespace Blog.Migrations
+namespace SiteInProgress.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -8,7 +8,7 @@ namespace Blog.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Blog.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SiteInProgress.Models.ApplicationDbContext>
     {
         public Configuration()
         {
@@ -16,7 +16,7 @@ namespace Blog.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(Blog.Models.ApplicationDbContext context)
+        protected override void Seed(SiteInProgress.Models.ApplicationDbContext context)
         {
             if (!context.Roles.Any())
             {
@@ -56,7 +56,7 @@ namespace Blog.Migrations
             var admin = new ApplicationUser
             {
                 UserName = email,
-                FullName = fullName,
+                
                 Email = email
             };
             var result = userManager.Create(admin, password);

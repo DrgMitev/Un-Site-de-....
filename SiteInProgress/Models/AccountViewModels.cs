@@ -49,9 +49,9 @@ namespace SiteInProgress.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -74,7 +74,7 @@ namespace SiteInProgress.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {1} characters long.", MinimumLength = 1)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
