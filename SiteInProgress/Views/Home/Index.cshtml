@@ -23,7 +23,7 @@
 
                     <td class="col-md-push-4"  style="padding-left:50 px">
                         <div class="col-lg-offset-2">
-                            <form action="@Url.Action("GalleryEdit", "ImageGallery", new { id = Model[j-1].FileID })">
+                            <form action="@Url.Action("GalleryDetails", "ImageGallery", new { id = Model[j-1].FileID })">
                                 <input type="image" src="data:image/png;base64,@Convert.ToBase64String(Model[j-1].FileData,0,Model[j-1].FileData.Length)" width="300" height="300" style="padding-left:50 px"/>
                             </form>
                         </div>

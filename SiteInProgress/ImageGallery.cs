@@ -30,10 +30,16 @@ namespace SiteInProgress
         public string UserID { get; set; }
         public System.DateTime DateOfPosting { get; set; }
         public string Title { get; set; }
-        [Display(Name = "Category name")]
+        [Display(Name = "Category Name")]
         public int CategoryId { get; set; }
+        [Display(Name = "Information about your drink")]
+        public string Info { get; set; }
+        [Display(Name = "Telephone number")]
+        public string Tel { get; set; }
         [Display(Name = "Please select a picture")]
         public HttpPostedFileBase File { get; set; }
+        public string City { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

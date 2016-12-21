@@ -1,36 +1,69 @@
-﻿@model List<SiteInProgress.ImageGallery>
+﻿@model SiteInProgress.Models.GalleryViewList
 @{
     ViewBag.Title = "Gallery";
 }
-<h2>Gallery</h2>
-<p>
-    @Html.ActionLink("Upload", "GalleryUpload")
-</p>
-@* Upload Images *@
-<table>
-    @{
-        int j = 0;
-        for (int i = Model.Count; i >= 0; i -= 4)
-        {
-            j = i;
-            <tr>
-                @* show 4 images in  a Row *@
-                @while (j > i - 4 && j > 0)
+<body>
+    <h2>Category - @Model.Category.CategoryName</h2>
+    <p>
+        @Html.ActionLink("Upload", "GalleryUpload")
+    </p>
+    @* Upload Images *@
+    <table>
+        @{
+            int j = 0;
+            for (int i = Model.ImageGalleries.Count; i >= 0; i -= 4)
+            {
+                j = i;
+                <tr>
+                    @* show 4 images in  a Row *@
+                    @while (j > i - 4 && j > 0)
                 {
 
-                    <td class="col-md-push-4" style="padding-left:50 px">
-                        <div class="col-lg-offset-2">
-                            <form action="@Url.Action("GalleryEdit", "ImageGallery", new { id = Model[j-1].FileID })">
-                                <input type="image" src="data:image/png;base64,@Convert.ToBase64String(Model[j-1].FileData,0,Model[j-1].FileData.Length)" width="300" height="300" style="padding-left:50 px" />
-                            </form>
-                        </div>
-                        <div>
-                            <text class="col-lg-offset-2 col-md-push-4">@Model[j - 1].Title </text>
-                        </div>
-                    </td>
-                    j--;
-                }
-            </tr>
+                        <td class="col-md-push-4" style="padding-left:50 px">
+                            <div class="col-lg-offset-2">
+
+
+                                <form action="@Url.Action("GalleryDetails", "ImageGallery", new { id =  Model.ImageGalleries[j-1].FileID })">
+                                    <input type="image" src="data:image/png;base64,@Convert.ToBase64String( Model.ImageGalleries[j-1].FileData,0, Model.ImageGalleries[j-1].FileData.Length)" width="300" height="300" style="padding-left:50 px" />
+                                </form>
+
+
+                            </div>
+                            <div>
+                                <text class="col-lg-offset-2 col-md-push-4">@Model.ImageGalleries[j - 1].Title </text>
+                            </div>
+                        </td>
+                        j--;
+                    }
+                </tr>
+            }
         }
-    }
-</table>
+    </table>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

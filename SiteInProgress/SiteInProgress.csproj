@@ -236,7 +236,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\GalleryUploadModel.cs" />
+    <Compile Include="Models\GalleryModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +260,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Model.edmx.sql" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="App_Data\ServerDatabase.mdf" />
     <Content Include="App_Data\ServerDatabase_log.ldf">
@@ -329,8 +330,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -355,6 +354,8 @@
     <Content Include="Views\ImageGallery\GalleryList.cshtml" />
     <Content Include="Views\ImageGallery\GalleryEdit.cshtml" />
     <Content Include="Views\ImageGallery\GalleryCategories.cshtml" />
+    <Content Include="Views\ImageGallery\GalleryDetails.cshtml" />
+    <Content Include="Views\ImageGallery\GalleryUserLatestAdverts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

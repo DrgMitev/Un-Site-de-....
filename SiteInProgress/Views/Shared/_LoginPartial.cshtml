@@ -48,6 +48,17 @@ else if (Request.IsAuthenticated && User.IsInRole("Admin"))
 
         </ul>
     }
+    using (Html.BeginForm("GalleryUserLatestAdverts", "ImageGallery", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Your latest adverts", "GalleryUserLatestAdverts", "ImageGallery", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+
+        </ul>
+    }
 
 }
 else

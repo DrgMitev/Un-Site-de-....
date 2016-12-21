@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="Model.AspNetRole">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetRole)">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="Model.AspNetUserClaim">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserClaim)">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="Model.AspNetUserLogin">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUserLogin)">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
           <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="Model.AspNetUser">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AspNetUser)">
         <MappingFragment StoreEntitySet="AspNetUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -47,16 +47,16 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="Model.Category">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Category)">
         <MappingFragment StoreEntitySet="Categories">
-          <ScalarProperty Name="CategoryCount" ColumnName="CategoryCount" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CategoryCount" ColumnName="CategoryCount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ImageGalleries">
-      <EntityTypeMapping TypeName="Model.ImageGallery">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ImageGallery)">
         <MappingFragment StoreEntitySet="ImageGalleries">
           <ScalarProperty Name="FileID" ColumnName="FileID" />
           <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -66,15 +66,18 @@
           <ScalarProperty Name="DateOfPosting" ColumnName="DateOfPosting" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="City" ColumnName="City" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="Model.sysdiagram">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.sysdiagram)">
         <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
@@ -90,42 +93,18 @@
     </AssociationSetMapping>
     <AssociationSetMapping Name="AspNetUsersImageGalleries" TypeName="Model.AspNetUsersImageGalleries" StoreEntitySet="AspNetUsersImageGalleries">
       <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="UserId" />
+        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
       </EndProperty>
       <EndProperty Name="ImageGalleries">
-        <ScalarProperty Name="FileID" ColumnName="FileID" />
+        <ScalarProperty Name="FileID" ColumnName="ImageGalleries_FileID" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model.Store.sp_alterdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model.Store.sp_creatediagram" />
-    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model.Store.sp_dropdiagram" />
-    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model.Store.sp_helpdiagramdefinition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.sp_helpdiagramdefinition_Result">
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model.Store.sp_helpdiagrams">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Model.sp_helpdiagrams_Result">
-          <ScalarProperty Name="Database" ColumnName="Database" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Owner" ColumnName="Owner" />
-          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model.Store.sp_upgraddiagrams" />
     <AssociationSetMapping Name="CategoriesImageGalleries" TypeName="Model.CategoriesImageGalleries" StoreEntitySet="CategoriesImageGalleries">
-      <EndProperty Name="ImageGallery">
-        <ScalarProperty Name="FileID" ColumnName="FileID" />
-      </EndProperty>
       <EndProperty Name="Category">
-        <ScalarProperty Name="Id" ColumnName="CategoryId" />
+        <ScalarProperty Name="Id" ColumnName="Categories_Id" />
+      </EndProperty>
+      <EndProperty Name="ImageGallery">
+        <ScalarProperty Name="FileID" ColumnName="ImageGalleries_FileID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

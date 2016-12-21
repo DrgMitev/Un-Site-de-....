@@ -73,6 +73,9 @@
     <Property Name="CategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUsersImageGalleries" FromRole="ImageGalleries" ToRole="AspNetUsers" />
     <NavigationProperty Name="Categories" Relationship="Model.CategoriesImageGalleries" FromRole="ImageGallery" ToRole="Category" />
+    <Property Name="Info" Type="String" Nullable="false" />
+    <Property Name="Tel" Type="String" Nullable="false" />
+    <Property Name="City" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>

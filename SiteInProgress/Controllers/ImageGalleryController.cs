@@ -13,8 +13,9 @@ namespace SiteInProgress.Models
 {
     public class ImageGalleryController : Controller
     {
-        
-       public ActionResult GalleryCategories()
+
+       
+        public ActionResult GalleryCategories()
         {
             using(Entities dc = new Entities())
             {
@@ -29,8 +30,14 @@ namespace SiteInProgress.Models
             
             using (Entities dc = new Entities())
             {
-                List<ImageGallery> all = dc.ImageGalleries.Where(x => x.CategoryId == id).ToList();
-                return View(all);
+                List<ImageGallery> all = dc.ImageGalleries.ToList();
+                List<ImageGallery> needed = all.Where(x => x.CategoryId == id).ToList();
+                Category category = dc.Categories.Find(id);
+                GalleryViewList GL = new GalleryViewList();
+                GL.Category = category;
+                GL.ImageGalleries = needed;
+
+                return View(GL);
             }
             
 
@@ -92,11 +99,17 @@ namespace SiteInProgress.Models
             }
             //adding date of post
             GV.ImageGallery.DateOfPosting = DateTime.Now;
+            //adding other info
+            GV.ImageGallery.City = GV.ImageGallery.City;
+            GV.ImageGallery.Tel = GV.ImageGallery.Tel;
+            GV.ImageGallery.Info = GV.ImageGallery.Info;
 
-            
+
+
             using (Entities dc = new Entities())
             {
-                GV.ImageGallery.FileID = dc.Categories.ToList().Count() + 1;
+                
+                
                 //listing database
                 GV.Categories = dc.Categories.ToList();
                 dc.ImageGalleries.Add(GV.ImageGallery);
@@ -181,7 +194,28 @@ namespace SiteInProgress.Models
             return RedirectToAction("GalleryList");
         }
         
+        public ActionResult GalleryDetails(int id)
+        {
+            using(Entities dc = new Entities())
+            {
+                GalleryUploadView GV = new GalleryUploadView();
+                GV.Categories = dc.Categories.ToList();
+                GV.ImageGallery = dc.ImageGalleries.Find(id);
 
+                return View(GV);
+            }
+        }
+
+        public ActionResult GalleryUserLatestAdverts()
+        {
+            using(Entities dc = new Entities())
+            {
+                List<ImageGallery> GL = new List<ImageGallery>();
+                List<ImageGallery> all = dc.ImageGalleries.ToList();
+                GL = all.Where(x => x.UserID == User.Identity.GetUserId()).ToList();
+                return View(GL);
+            }
+        }
 
         
         public ActionResult GalleryDelete(int id)
@@ -192,7 +226,7 @@ namespace SiteInProgress.Models
                 dc.ImageGalleries.Remove(IG);
                 dc.SaveChanges();
 
-                return RedirectToAction("GalleryList");
+                return RedirectToAction("GalleryUserLatestAdverts");
             }
 
             
