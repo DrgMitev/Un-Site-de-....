@@ -192,6 +192,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="AspNetRole.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -257,6 +260,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\User\Edit.cshtml" />
     <Content Include="App_Data\ServerDatabase.mdf" />
     <Content Include="App_Data\ServerDatabase_log.ldf">
       <DependentUpon>ServerDatabase.mdf</DependentUpon>
@@ -295,6 +299,8 @@
     <Content Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -348,6 +354,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ImageGallery\GalleryList.cshtml" />
     <Content Include="Views\ImageGallery\GalleryEdit.cshtml" />
+    <Content Include="Views\ImageGallery\GalleryCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

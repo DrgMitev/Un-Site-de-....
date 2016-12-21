@@ -17,9 +17,9 @@ namespace SiteInProgress.Models
         public List<Category> Categories { get; set; }
    
     }
-    public class GalleryUploadPost
+    public class GalleryUploadList
     {
-        public ImageGallery ImageGallery { get; set; }
-        public Category Category { get; set; }
+        public List<ImageGallery> ImageGalleries { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

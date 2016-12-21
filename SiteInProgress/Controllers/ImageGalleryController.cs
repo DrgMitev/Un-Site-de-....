@@ -14,15 +14,25 @@ namespace SiteInProgress.Models
     public class ImageGalleryController : Controller
     {
         
-        
-        public ActionResult GalleryList()
+       public ActionResult GalleryCategories()
         {
-            List<ImageGallery> all = new List<ImageGallery>();
+            using(Entities dc = new Entities())
+            {
+                GalleryUploadList all = new GalleryUploadList();
+                all.Categories = dc.Categories.OrderBy(x => x.CategoryName).ToList();
+                all.ImageGalleries = dc.ImageGalleries.ToList();
+                return View(all);
+            }
+        }
+        public ActionResult GalleryList(int id )
+        {
+            
             using (Entities dc = new Entities())
             {
-                all = dc.ImageGalleries.ToList();
+                List<ImageGallery> all = dc.ImageGalleries.Where(x => x.CategoryId == id).ToList();
+                return View(all);
             }
-            return View(all);
+            
 
         }
        
@@ -60,6 +70,7 @@ namespace SiteInProgress.Models
                 ModelState.AddModelError("CustomError", "Picture type allowed : jpeg/gif/raw/tif");
                 return View();
             }
+            
             //adding file info
             GV.ImageGallery.FileName = GV.ImageGallery.File.FileName;
             GV.ImageGallery.FileSize = GV.ImageGallery.File.ContentLength;
@@ -85,6 +96,7 @@ namespace SiteInProgress.Models
             
             using (Entities dc = new Entities())
             {
+                GV.ImageGallery.FileID = dc.Categories.ToList().Count() + 1;
                 //listing database
                 GV.Categories = dc.Categories.ToList();
                 dc.ImageGalleries.Add(GV.ImageGallery);
@@ -114,11 +126,11 @@ namespace SiteInProgress.Models
                 ImageGallery image = dc.ImageGalleries.Find(id);
                 GalleryUploadView GV = new GalleryUploadView();
                 //checking for invalid image
-                if (id < 0 || dc.ImageGalleries.ToList().Count+1<id)
+                if (id < 0 )
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                if(image.UserID != User.Identity.GetUserId())
+                if(image.UserID != User.Identity.GetUserId() && User.IsInRole("Admin")!= true)
                 {
                     return RedirectToAction("Authorize", "Home");
                 }
@@ -128,7 +140,7 @@ namespace SiteInProgress.Models
                 GV.Categories = dc.Categories.ToList();
                 //updating category count
                 Category CurrentCategory = dc.Categories.Find(image.CategoryId);
-                CurrentCategory.CategoryCount -= 1;
+                
                 dc.Entry(CurrentCategory).State = EntityState.Modified;
                 dc.SaveChanges();
                 //returning to edit page
@@ -138,19 +150,28 @@ namespace SiteInProgress.Models
         }
 
         [HttpPost]
-        public ActionResult GalleryEdit(GalleryUploadView GV)
+        public ActionResult GalleryEdit(GalleryUploadView GV, string submit)
         {
             if (ModelState.IsValid)
             {
-                if(GV.ImageGallery.UserID == User.Identity.GetUserId()|| User.IsInRole("admin"))
-                using (Entities dc = new Entities())
+                if(GV.ImageGallery.UserID == User.Identity.GetUserId()|| User.IsInRole("Admin"))
                 {
-                    Category CurrentCategory = dc.Categories.Find(GV.ImageGallery.CategoryId);
-                    dc.Entry(CurrentCategory).State = EntityState.Modified;
-                    dc.Entry(GV.ImageGallery).State = EntityState.Modified;
-                    dc.SaveChanges();
-                    return RedirectToAction("GalleryList");
+                    if(submit.Equals("Save")&&submit.Equals("Delete The Post")!= true)
+                    using (Entities dc = new Entities())
+                    {
+                        Category CurrentCategory = dc.Categories.Find(GV.ImageGallery.CategoryId);
+                            CurrentCategory.CategoryCount =+1;
+                        dc.Entry(CurrentCategory).State = EntityState.Modified;
+                        dc.Entry(GV.ImageGallery).State = EntityState.Modified;
+                        dc.SaveChanges();
+                        return RedirectToAction("GalleryList");
+                    }
+                    else if (submit.Equals("Save")!= true && submit.Equals("Delete The Post"))
+                    {
+                        return RedirectToAction("GalleryDelete","ImageGallery", new {id = GV.ImageGallery.FileID} );
+                    }
                 }
+                
                 else
                 {
                     return RedirectToAction("Authorize", "Home");
@@ -158,6 +179,23 @@ namespace SiteInProgress.Models
             }
             
             return RedirectToAction("GalleryList");
+        }
+        
+
+
+        
+        public ActionResult GalleryDelete(int id)
+        {
+            using(Entities dc = new Entities())
+            {
+                ImageGallery IG = dc.ImageGalleries.Find(id);
+                dc.ImageGalleries.Remove(IG);
+                dc.SaveChanges();
+
+                return RedirectToAction("GalleryList");
+            }
+
+            
         }
     }
 }

@@ -10,7 +10,13 @@ namespace SiteInProgress.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<ImageGallery> all = new List<ImageGallery>();
+            using (Entities dc = new Entities())
+            {
+                all = dc.ImageGalleries.ToList();
+            }
+            return View(all);
+
         }
 
         public ActionResult About()

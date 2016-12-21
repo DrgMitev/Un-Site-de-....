@@ -1,0 +1,43 @@
+﻿@model SiteInProgress.Models.GalleryUploadList
+@{
+    ViewBag.Title = "Gallery";
+}
+<h2>Gallery</h2>
+<p>
+    @Html.ActionLink("Upload", "GalleryUpload")
+</p>
+@* Upload Images *@
+<table>
+    @{
+        int j = 0;
+        for (int i = Model.Categories.Count; i > 0; i--)
+        {
+            j = i;
+
+                    <tr class="spacer" style="padding-left:50 px">
+                        <h2 class="col-lg-offset-2">
+                                <a href="@Url.Action("GalleryList", "ImageGallery", 
+                                        new { id = Model.Categories[j - 1].Id })">@Model.Categories[j - 1].CategoryName</a>
+                                (@Model.Categories[j - 1].CategoryCount adverts)
+                        </h2>
+                        
+                        @if (Model.Categories[j - 1].CategoryCount >= 0)
+                        {
+                            ImageGallery file = Model.ImageGalleries.ToList().Where(x => x.CategoryId == Model.Categories[j - 1].Id).FirstOrDefault(); 
+                        <div class="col-lg-offset-2">
+                            <form action="@Url.Action("GalleryEdit", "ImageGallery", new { id = file.FileID })">
+                                <input type="image" id="" src="data:image/png;base64,@Convert.ToBase64String(file.FileData, 0, file.FileData.Length)" 
+                                       width="300" height="300" style="padding-left:50 px" />
+                            </form>
+                        </div>
+                        }
+                        else
+                        {
+                            
+                        }
+
+                    </tr>
+                    
+        }
+    }
+</table>
