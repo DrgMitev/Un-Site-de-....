@@ -5,6 +5,7 @@
 
 <h2>@ViewBag.Title.</h2>
 
+<body background="~/Content/background.jpg" >
 @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
     @Html.Hidden("rememberMe", @Model.RememberMe)
@@ -22,3 +23,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+</body>
