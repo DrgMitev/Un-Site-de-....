@@ -6876,5 +6876,51 @@ modal close {
 .h6{
     color: white;
 }
+.table
+ {
+    background-color: rgb(24,24,24) ;
+    background-color: rgba(24,24,24, 0.5)
+    
+}
+
+.table tr,
+.table td,
+.table tbody,
+.table tbody td,
+.table tbody tr,
+.table thead td,
+.table thead tr
+.tr,
+.td
+
+ {
+    background-color: 	rgb(144,144,144)  ;
+    background-color: rgba(144,144,144, 0.5)
+}
+
+.div
+{
+    background-color : rgb(56,56,56) ;
+    background-color: rgba(56,56,56, 0.5)
+}
+.well
+{
+    background-color : 	rgb(80,80,80) ;
+    background-color: 	rgba(80,80,80, 0.5)
+}
+.row{
+    background-color:	rgb(144,144,144)  ;
+    background-color: rgba(144,144,144, 0.5)
+}
 
 
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgb(56,56,56) ;
+  opacity: 0,5;
+}   
+
+a.my-class { color: #333333 }
+a.my-class:active { color: #666666 }
+a.my-class:link { color: #999999 }
+a.my-class:visited { color: #CCCCCC }

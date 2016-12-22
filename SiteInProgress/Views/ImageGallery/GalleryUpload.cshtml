@@ -3,74 +3,75 @@
 @{
     ViewBag.Title = "";
 }
-<h2><b>Upload a photo</b></h2>
-<h4><b>Share your findings with the world o||o</b></h4>
-<hr/>
+<body background="~/Content/background.jpg">
+    <h2><b>Share your Rakia ma'frien'</b></h2>
+    <h4><b>Share your findings with the world o||o</b></h4>
+    <hr />
 
-@using (Html.BeginForm("GalleryUpload", "ImageGallery", FormMethod.Post, new { enctype = "multipart/form-data",@class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.ImageGallery.File, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ImageGallery.File, new { @class = "form-control", type = "file" })
+    @using (Html.BeginForm("GalleryUpload", "ImageGallery", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImageGallery.File, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.File, new { @class = "form-control", type = "file" })
+            </div>
         </div>
-    </div>
 
 
-    <div class="form-group">
-      
-        @Html.LabelFor(m => m.ImageGallery.Title, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ImageGallery.Title, new {  @class = "textarea" })
+        <div class="form-group">
+
+            @Html.LabelFor(m => m.ImageGallery.Title, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.Title, new { @class = "textarea" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
+        <div class="form-group">
 
-        @Html.LabelFor(m => m.ImageGallery.CategoryId, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.ImageGallery.CategoryId,
+            @Html.LabelFor(m => m.ImageGallery.CategoryId, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.ImageGallery.CategoryId,
            new SelectList(Model.Categories, "Id", "CategoryName"), new { @class = "textarea" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
+        <div class="form-group">
 
-        @Html.LabelFor(m => m.ImageGallery.Tel, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ImageGallery.Tel, new { @class = "textarea" })
+            @Html.LabelFor(m => m.ImageGallery.Tel, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.Tel, new { @class = "textarea" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
+        <div class="form-group">
 
-        @Html.LabelFor(m => m.ImageGallery.City, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.ImageGallery.City, new { @class = "textarea" })
+            @Html.LabelFor(m => m.ImageGallery.City, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.City, new { @class = "textarea" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
+        <div class="form-group">
 
-        @Html.LabelFor(m => m.ImageGallery.Info, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.ImageGallery.Info, new { @class = "form-control", @rows = "7" })
+            @Html.LabelFor(m => m.ImageGallery.Info, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.ImageGallery.Info, new { @class = "form-control", @rows = "7" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Upload" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Upload" />
+            </div>
         </div>
-    </div>
 
 
-}   
+    }
 
-@if(Model.ImageGallery.File!=null)
-{
-    <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageGallery.FileData,0,Model.ImageGallery.FileData.Length)" box-shadow: 8px 8px 10px #aaa/>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @if (Model.ImageGallery.File != null)
+    {
+        <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageGallery.FileData,0,Model.ImageGallery.FileData.Length)" box-shadow 8px 8px 10px #aaa />
+    }
+</body>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
