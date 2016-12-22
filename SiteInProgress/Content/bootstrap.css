@@ -6815,6 +6815,66 @@ td.visible-print {
   }
 }
 .jumbotron {
-   background: rgb(200, 54, 54); /* This is for ie8 and below */
-   background: rgba(200, 54, 54, 0.5); 
+   background: 	rgb(211,211,211); 
+   background: 	rgba(211,211,211, 0.5); 
 }
+.body {
+    background :fixed;
+    background-image: url("../Content/background.jpg");
+    background-attachment :fixed;
+    background-size:cover;
+    margin : 0px
+}
+.img {
+    border-radius: 8px;
+    margin-top:25px;
+}
+.panel-default close {
+  color: #2c3e50;
+}
+modal close {
+  color: #2c3e50;
+}
+.popover {
+  color: #2c3e50;
+}
+.article .author {
+  margin-bottom: 0;
+}
+.article .author  {
+  display: block;
+  font-size: 100%;
+  line-height: 1.42857143;
+  color: #b4bcc2;
+}
+.article .author  {
+  content: '\2014 \00A0';
+}
+.picture{
+    margin-top: 10px;
+    margin: 5px;    
+}
+.body
+{ color: white;
+
+}
+.h1{
+    color: white;
+}
+.h2{
+    color: white;
+}
+.h3{
+    color: white;
+}
+.h4{
+    color: white;
+}
+.h5{
+    color: white;
+}
+.h6{
+    color: white;
+}
+
+

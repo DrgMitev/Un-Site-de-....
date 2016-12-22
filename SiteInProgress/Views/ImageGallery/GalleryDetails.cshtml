@@ -1,0 +1,79 @@
+﻿@model SiteInProgress.Models.GalleryUploadView
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Details 'bout your precious treasure</h2>
+@RenderBody()
+@using (Html.BeginForm("GalleryDetails", "ImageGallery", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(Model => Model.ImageGallery.FileID)
+        @Html.HiddenFor(Model => Model.ImageGallery.DateOfPosting)
+        @Html.HiddenFor(Model => Model.ImageGallery.FileData)
+        @Html.HiddenFor(Model => Model.ImageGallery.FileName)
+        @Html.HiddenFor(Model => Model.ImageGallery.FileSize)
+        @Html.HiddenFor(Model => Model.ImageGallery.UserID)
+        @Html.HiddenFor(Model => Model.ImageGallery.File)
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.ImageGallery.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.ImageGallery.Title, new { htmlAttributes = new { @class = "form-control readonly" } })
+                @Html.ValidationMessageFor(model => Model.ImageGallery.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImageGallery.CategoryId, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.ImageGallery.CategoryId,
+           new SelectList(Model.Categories, "Id", "CategoryName"), new { @class = "textarea readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(m => m.ImageGallery.Tel, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.Tel, new { @class = "texta reareadonly" })
+            </div>
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(m => m.ImageGallery.City, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.ImageGallery.City, new { @class = "textarea readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            @Html.LabelFor(m => m.ImageGallery.Info, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.ImageGallery.Info, new { @class = "form-control readonly", @rows = "7" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <img src="data:image/png;base64,@Convert.ToBase64String(Model.ImageGallery.FileData,0,Model.ImageGallery.FileData.Length)" box-shadow="8px 8px 10px #aaa" />
+            </div>
+        </div>
+
+
+       
+
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back", "Index", "Home")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
